@@ -117,16 +117,19 @@
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         canvas.getContext('2d').drawImage(video, 0, 0);
-        $("#card-photo").collapse("hide");
-        $("#card-password").collapse("show");
         base64Png = canvas.toDataURL('image/png');
-    });
-
-    $("#password-form").submit(function() {
         postData = {
             citizenId: citizenId,
             base64Png: base64Png
         }
+        $.post("/api/register", postData)
+            .done(function(data){
+                $("#card-photo").collapse("hide");
+                $("#card-password").collapse("show");
+            });
+    });
+
+    $("#password-form").submit(function() {
         console.log("wtf");
         window.location.reload(1);
     });
