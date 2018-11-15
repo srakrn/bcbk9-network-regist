@@ -8,12 +8,12 @@
 </head>
 <body>
     <div class="container">
-        <div id="card-citizen">
+        <div id="card-citizen" class="collapse show">
             <div class="row">
                 <div class="col-12">
                     <h1>กรอกรหัสบัตรประชาชน</h1>
                     <hr/>
-                    <form action="#">
+                    <form id="citizen-form" onsubmit="return false">
                         <div class="form-group">
                             <label for="citizen-id">กรุณากรอกรหัสบัตรประชาชน 13 หลัก</label>
                             <input class="form-control" id="citizen-id">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div id="card-photo">
+        <div id="card-photo" class="collapse">
             <div class="row">
                 <div class="col-12">
                     <h1>ถ่ายรูปคู่กับบัตรประชาชน</h1>
@@ -47,11 +47,13 @@
                             และจะทำลายข้อมูลทิ้งภายในระยะเวลากฏหมายกำหนด
                         </small>
                     </p>
-                    <button class="btn btn-primary">ถ่ายรูป</button>
+                    <form id="photo-form" onsubmit="return false">
+                        <button type="submit" class="btn btn-primary">ถ่ายรูป</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <div id="card-password">
+        <div id="card-password" class="collapse">
             <div class="row">
                 <div class="col-12">
                     <h1>รับรหัสผ่าน</h1>
@@ -69,6 +71,9 @@
                     <h2>วิธีเข้าใช้งาน</h2>
                     <p>(กรุณาถ่ายรหัสและวิธีการเข้าใช้งานไว้ก่อน เพื่อให้ผู้อื่นด้านหลังท่านได้ลงทะเบียนรับรหัสผ่าน)</p>
                     <p>เชื่อมต่อกับไวไฟ <b>BCBK9</b> แล้วกรอกชื่อผู้ใช้-รหัสผ่านดังกล่าว</p>
+                    <form id="password-form" onsubmit="return false">
+                        <button type="submit" class="btn btn-primary">ปิดหน้านี้</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -76,14 +81,32 @@
 </body>
 <script>
     const constraints = {
-    video: true
+        video: true
     };
 
-    function handleSuccess(stream) {
+    function cameraPreview(stream) {
         document.getElementById('webcam-preview').srcObject = stream;
     }
 
+    $("#citizen-form").submit(function(){
+        console.log($("#citizen-id").val());
+        $("#card-citizen").collapse("hide");
+        $("#card-photo").collapse("show");
+    });
+
+    $("#photo-form").submit(function(){
+        $("#card-photo").collapse("hide");
+        $("#card-password").collapse("show");
+    });
+
+    $("#password-form").submit(function(){
+        console.log("wtf");
+        window.location.href = window.location.href; //This is a possibility
+        window.location.reload(1); //Another possiblity
+        history.go(0); //And another
+    });
+
     navigator.mediaDevices.getUserMedia(constraints).
-        then(handleSuccess);
+        then(cameraPreview);
 </script>
 </html>
