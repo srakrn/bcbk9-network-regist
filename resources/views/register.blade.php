@@ -4,9 +4,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <title>Test</title>
+    <title>BCBK9 Network Registration</title>
+    <style type="text/css">
+        #logo{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 20%;
+            z-index: -2;
+        }
+    </style>
 </head>
 <body>
+    <div class="logo">
+        <img src="/bcbk9-logo.svg" id="logo" width="100%"></img>
+    </div>
     <div class="container">
         <div id="card-citizen" class="collapse show">
             <div class="row">
