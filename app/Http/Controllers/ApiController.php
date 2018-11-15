@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+
 class ApiController extends Controller
 {
-    public function register()
+    public function register(Request $request)
     {
-        return response()->json(['username' => 'testtest', 'password' => 'testtesttest']);
+        $data = Input::all();
+        $wifi = \App\Wifi::whereNull('registration_id')->first();
+        $wifi->registration_id = Input::get('citizenId');
+        $wifi->save();
+        $registration = new \App\Registration;
+        $registration->id = Input::get('citizenId');
+        $registration->base64_png = Input::get('base64Png');
+        $registration->save();
+        return response()->json($wifi);
     }
 }
