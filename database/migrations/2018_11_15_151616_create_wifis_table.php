@@ -17,6 +17,7 @@ class CreateWifisTable extends Migration
             $table->string('id');
             $table->string('password');
             $table->string('registration_id')->nullable();
+            $table->primary('id');
         });
     }
 
