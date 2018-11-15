@@ -6,6 +6,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <title>BCBK9 Network Registration</title>
     <style type="text/css">
+        body{
+            margin-top: 30px;
+        }
         #logo{
             position: absolute;
             bottom: 10px;
@@ -20,11 +23,12 @@
         <img src="/bcbk9-logo.svg" id="logo" width="100%"></img>
     </div>
     <div class="container">
+        <h1>BarCamp Bangkhen 9 Internet Access</h1>
+        <hr/>
         <div id="card-citizen" class="collapse show">
             <div class="row">
-                <div class="col-12">
-                    <h1>กรอกรหัสบัตรประชาชน</h1>
-                    <hr/>
+                <div class="col-6">
+                    <h2>กรอกรหัสบัตรประชาชน</h2>
                     <form id="citizen-form" onsubmit="return false">
                         <div class="form-group">
                             <label for="citizen-id">กรุณากรอกรหัสบัตรประชาชน 13 หลัก</label>
@@ -34,13 +38,33 @@
                         <button type="submit" class="btn btn-primary">ยืนยัน</button>
                     </form>
                 </div>
+                <div class="col-6">
+                    <div class="alert alert-light">
+                        <h4>ข้อบ่งชี้ความเป็นส่วนตัว</h4>
+                        <small>
+                            <p>
+                                ข้อมูลของท่านจะถูกถือครองโดยฝ่ายเครือข่าย บาร์แคมป์ บางเขน ครั้งที่ 9
+                                และจะไม่เปิดเผยให้ทีมงานบาร์แคมป์ บางเขน ครั้งที่ 9 ในฝ่ายอื่น
+                            </p>
+                            <p>
+                                ทีมงานบาร์แคมป์ บางเขน ครั้งที่ 9 จะไม่ส่งมอบข้อมูลใดๆ ที่ท่านกรอกให้กับบุคคลใดบุคคลอื่น
+                                ยกเว้นเจ้าพนักงานหรือเจ้าหน้าที่บังคับใช้กฏหมายที่บังคับใช้พระราชบัญญัติคอมพิวเตอร์
+                                หรือพนักงานของมหาวิทยาลัยเกษตรศาสตร์ที่ได้รับคำสั่งจากเจ้าพนักงานบังคับใช้กฏหมาย
+                                ข้อมูลจะถูกทำลายทิ้งเมื่อล่วงเลยระยะเวลาที่กฏหมายกำหนดให้เก็บ
+                                (หรือเวลาที่เจ้าพนักงานออกคำสั่งให้เก็บข้อมูลเพิ่มเติม)
+                            </p>
+                            <p>
+                                ทีมงานจะเปิดเผยสถิติการขอข้อมูลจากเจ้าหน้าที่รัฐ บนเพจเฟซบุ๊คของงาน หากมีการร้องขอดังกล่าวเข้ามา
+                            </p>
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="card-photo" class="collapse">
             <div class="row">
                 <div class="col-12">
-                    <h1>ถ่ายรูปคู่กับบัตรประชาชน</h1>
-                    <hr/>
+                    <h2>ถ่ายรูปคู่กับบัตรประชาชน</h2>
                 </div>
             </div>
             <div class="row">
@@ -51,18 +75,13 @@
                 <div class="col-6">
                     <h2>วิธีการถ่ายรูป</h2>
                     <ul>
-                        <li>ถ่ายรูปคู่กับบัตรประชาชน ให้ข้อความบนบัตรเห็นชัด ไม่พร่าเลือน</li>
+                        <li>รูปต้องเห็นรหัสบัตรประชาชนตรงกับที่กรอกก่อนหน้านี้ และต้องเห็นชื่อชัดเจน</li>
                         <li>หน้าของผู้ที่ถ่ายรูป จะต้องตรงกับหน้าบนบัตรประชาชน</li>
+                        <li class="text-info">สามารถปิดที่อยู่บนบัตรประชาชนด้วยนิ้วได้</li>
                     </ul>
-                    <p>
-                        <small>
-                            ทีมงานบาร์แคมป์บางเขน ครั้งที่ 9 จะไม่ส่งมอบข้อมูลใดๆ ที่ท่านกรอกให้กับบุคคลใดบุคคลอื่น
-                            ยกเว้นเจ้าพนักงานหรือเจ้าหน้าที่บังคับใช้กฏหมายที่บังคับใช้พระราชบัญญัติคอมพิวเตอร์
-                            และจะทำลายข้อมูลทิ้งภายในระยะเวลากฏหมายกำหนด
-                        </small>
-                    </p>
                     <form id="photo-form" onsubmit="return false">
                         <button type="submit" class="btn btn-primary">ถ่ายรูป</button>
+                        <img src="/loader.svg" height="30px" id="photo-form-loader" style="display: none"></img>
                     </form>
                 </div>
             </div>
@@ -70,8 +89,7 @@
         <div id="card-password" class="collapse">
             <div class="row">
                 <div class="col-12">
-                    <h1>รับรหัสผ่าน</h1>
-                    <hr/>
+                    <h2>รับรหัสผ่าน</h2>
                 </div>
             </div>
             <div class="row">
@@ -94,8 +112,7 @@
         <div id="card-error" class="collapse">
             <div class="row">
                 <div class="col-12">
-                    <h1>ข้อผิดพลาด</h1>
-                    <hr/>
+                    <h2>ข้อผิดพลาด</h2>
                 </div>
             </div>
             <div class="row">
@@ -151,6 +168,8 @@
             citizenId: citizenId,
             base64Png: base64Png
         }
+        $("#photo-form-loader").show();
+        $("#photo-form").find(":submit").prop("disabled", true);
         $.post("/api/register", postData)
             .done(function(data){
                 $("#wifi-username").html(data.id);
