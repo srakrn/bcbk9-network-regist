@@ -124,6 +124,8 @@
         }
         $.post("/api/register", postData)
             .done(function(data){
+                $("#wifi-username").html(data.username);
+                $("#wifi-password").html(data.password);
                 $("#card-photo").collapse("hide");
                 $("#card-password").collapse("show");
             });
