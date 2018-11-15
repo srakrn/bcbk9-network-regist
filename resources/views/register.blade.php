@@ -32,7 +32,7 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    ทดสอบ
+                    <video id="webcam-preview" width="100%" autoplay></video>
                 </div>
                 <div class="col-6">
                     <h2>วิธีการถ่ายรูป</h2>
@@ -40,11 +40,14 @@
                         <li>ถ่ายรูปคู่กับบัตรประชาชน ให้ข้อความบนบัตรเห็นชัด ไม่พร่าเลือน</li>
                         <li>หน้าของผู้ที่ถ่ายรูป จะต้องตรงกับหน้าบนบัตรประชาชน</li>
                     </ul>
-                    <small>
-                        ทีมงานบาร์แคมป์บางเขน ครั้งที่ 9 จะไม่ส่งมอบข้อมูลใดๆ ที่ท่านกรอกให้กับบุคคลใดบุคคลอื่น
-                        ยกเว้นเจ้าพนักงานหรือเจ้าหน้าที่บังคับใช้กฏหมายที่บังคับใช้พระราชบัญญัติคอมพิวเตอร์
-                        และจะทำลายข้อมูลทิ้งภายในระยะเวลากฏหมายกำหนด
-                    </small>
+                    <p>
+                        <small>
+                            ทีมงานบาร์แคมป์บางเขน ครั้งที่ 9 จะไม่ส่งมอบข้อมูลใดๆ ที่ท่านกรอกให้กับบุคคลใดบุคคลอื่น
+                            ยกเว้นเจ้าพนักงานหรือเจ้าหน้าที่บังคับใช้กฏหมายที่บังคับใช้พระราชบัญญัติคอมพิวเตอร์
+                            และจะทำลายข้อมูลทิ้งภายในระยะเวลากฏหมายกำหนด
+                        </small>
+                    </p>
+                    <button class="btn btn-primary">ถ่ายรูป</button>
                 </div>
             </div>
         </div>
@@ -71,4 +74,16 @@
         </div>
     </div>
 </body>
+<script>
+    const constraints = {
+    video: true
+    };
+
+    function handleSuccess(stream) {
+        document.getElementById('webcam-preview').srcObject = stream;
+    }
+
+    navigator.mediaDevices.getUserMedia(constraints).
+        then(handleSuccess);
+</script>
 </html>
