@@ -87,19 +87,28 @@
     function cameraPreview(stream) {
         document.getElementById('webcam-preview').srcObject = stream;
     }
+    function checkId(id){
+        if(id.length != 13) {
+            return false;
+        }
+        for(i=0, sum=0; i < 12; i++) {
+            sum += parseFloat(id.charAt(i))*(13-i);
+        }
+        return (11-sum%11)%10 == parseFloat(id.charAt(12))
+    }
 
-    $("#citizen-form").submit(function(){
+    $("#citizen-form").submit(function() {
         console.log($("#citizen-id").val());
         $("#card-citizen").collapse("hide");
         $("#card-photo").collapse("show");
     });
 
-    $("#photo-form").submit(function(){
+    $("#photo-form").submit(function() {
         $("#card-photo").collapse("hide");
         $("#card-password").collapse("show");
     });
 
-    $("#password-form").submit(function(){
+    $("#password-form").submit(function() {
         console.log("wtf");
         window.location.href = window.location.href; //This is a possibility
         window.location.reload(1); //Another possiblity
