@@ -79,6 +79,23 @@
                 </div>
             </div>
         </div>
+        <div id="card-error" class="collapse">
+            <div class="row">
+                <div class="col-12">
+                    <h1>ข้อผิดพลาด</h1>
+                    <hr/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-danger" id="error-message">
+                    </div>
+                    <form id="error-form" onsubmit="return false">
+                        <button type="submit" class="btn btn-primary">ปิดหน้านี้</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script>
@@ -124,15 +141,32 @@
         }
         $.post("/api/register", postData)
             .done(function(data){
-                $("#wifi-username").html(data.username);
+                $("#wifi-username").html(data.id);
                 $("#wifi-password").html(data.password);
                 $("#card-photo").collapse("hide");
                 $("#card-password").collapse("show");
+            })
+            .fail(function(data){
+                var error = data.responseJSON.message;
+                if(error == 'Creating default object from empty value'){
+                    $("#error-message").html("รหัสผ่านที่เตรียมไว้หมดลงแล้ว ขออภัยในความไม่สะดวก");
+                }
+                else if(error.includes('Duplicate entry')){
+                    $("#error-message").html("คุณได้ใช้รหัสบัตรประชาชนนี้ในการลงทะเบียนแล้ว");
+                }
+                else{
+                    $("#error-message").html("เกิดข้อผิดพลาด (" + error + ")");
+                }
+                $("#card-photo").collapse("hide");
+                $("#card-error").collapse("show");
             });
     });
 
     $("#password-form").submit(function() {
-        console.log("wtf");
+        window.location.reload(1);
+    });
+
+    $("#error-form").submit(function() {
         window.location.reload(1);
     });
 
