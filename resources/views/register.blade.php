@@ -18,6 +18,7 @@
                             <label for="citizen-id">กรุณากรอกรหัสบัตรประชาชน 13 หลัก</label>
                             <input class="form-control" id="citizen-id">
                         </div>
+                        <div class="alert alert-warning collapse" id="citizen-id-alert"></div>
                         <button type="submit" class="btn btn-primary">ยืนยัน</button>
                     </form>
                 </div>
@@ -33,6 +34,7 @@
             <div class="row">
                 <div class="col-6">
                     <video id="webcam-preview" width="100%" autoplay></video>
+                    <canvas style="display:none;"></canvas>
                 </div>
                 <div class="col-6">
                     <h2>วิธีการถ่ายรูป</h2>
@@ -83,9 +85,11 @@
     const constraints = {
         video: true
     };
+    const video = document.getElementById("webcam-preview")
+    const canvas = document.createElement("canvas");
 
     function cameraPreview(stream) {
-        document.getElementById('webcam-preview').srcObject = stream;
+        video.srcObject = stream;
     }
     function checkId(id){
         if(id.length != 13) {
@@ -94,25 +98,37 @@
         for(i=0, sum=0; i < 12; i++) {
             sum += parseFloat(id.charAt(i))*(13-i);
         }
-        return (11-sum%11)%10 == parseFloat(id.charAt(12))
+        return (11-sum%11)%10 == parseFloat(id.charAt(12));
     }
 
     $("#citizen-form").submit(function() {
-        console.log($("#citizen-id").val());
-        $("#card-citizen").collapse("hide");
-        $("#card-photo").collapse("show");
+        citizenId = $("#citizen-id").val();
+        if(checkId(citizenId)){
+            $("#card-citizen").collapse("hide");
+            $("#card-photo").collapse("show");
+        }
+        else{
+            $("#citizen-id-alert").html("คุณใส่เลขประจำตัวประชาชนไม่ถูกต้อง");
+            $("#citizen-id-alert").collapse("show");
+        }
     });
 
     $("#photo-form").submit(function() {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
         $("#card-photo").collapse("hide");
         $("#card-password").collapse("show");
+        base64Png = canvas.toDataURL('image/png');
     });
 
     $("#password-form").submit(function() {
+        postData = {
+            citizenId: citizenId,
+            base64Png: base64Png
+        }
         console.log("wtf");
-        window.location.href = window.location.href; //This is a possibility
-        window.location.reload(1); //Another possiblity
-        history.go(0); //And another
+        window.location.reload(1);
     });
 
     navigator.mediaDevices.getUserMedia(constraints).
