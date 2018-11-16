@@ -178,15 +178,12 @@
                 $("#card-password").collapse("show");
             })
             .fail(function(data){
-                var error = data.responseJSON.message;
-                if(error == 'Creating default object from empty value'){
-                    $("#error-message").html("รหัสผ่านที่เตรียมไว้หมดลงแล้ว ขออภัยในความไม่สะดวก");
-                }
-                else if(error.includes('Duplicate entry')){
-                    $("#error-message").html("คุณได้ใช้รหัสบัตรประชาชนนี้ในการลงทะเบียนแล้ว");
+                var error = data.responseJSON;
+                if("status" in error){
+                    $("#error-message").html(error.message);
                 }
                 else{
-                    $("#error-message").html("เกิดข้อผิดพลาด (" + error + ")");
+                    $("#error-message").html("เกิดข้อผิดพลาด (" + error.message + ")");
                 }
                 $("#card-photo").collapse("hide");
                 $("#card-error").collapse("show");
