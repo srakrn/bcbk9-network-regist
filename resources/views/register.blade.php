@@ -8,6 +8,8 @@
     <style type="text/css">
         body{
             margin-top: 30px;
+            background: url('background.png');
+            background-size: cover;
         }
         .header-logo{
             position: relative;
@@ -64,16 +66,17 @@
         <div id="card-photo" class="collapse">
             <div class="row">
                 <div class="col-12">
-                    <h2>ถ่ายรูปคู่กับบัตรประชาชน</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
+                    <h2>ถ่ายรูปคู่กับบัตรประชาชน</h2>
                     <video id="webcam-preview" width="100%" autoplay></video>
                     <canvas style="display:none;"></canvas>
                 </div>
                 <div class="col-6">
                     <h2>วิธีการถ่ายรูป</h2>
+                    <img src="/guide.png" width="100%"></img>
                     <ul>
                         <li>รูปต้องเห็นรหัสบัตรประชาชนตรงกับที่กรอกก่อนหน้านี้ และต้องเห็นชื่อชัดเจน</li>
                         <li>ต้องเห็นหน้า และหน้าของผู้ที่ถ่ายรูป จะต้องตรงกับหน้าบนบัตรประชาชน</li>
