@@ -9,21 +9,21 @@
         body{
             margin-top: 30px;
         }
-        #logo{
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: 20%;
-            z-index: -2;
+        .header-logo{
+            position: relative;
+            bottom: 8px;
+            height: 60px;
         }
     </style>
 </head>
 <body>
     <div class="logo">
-        <img src="/bcbk9-logo.svg" id="logo" width="100%"></img>
     </div>
     <div class="container">
-        <h1>BarCamp Bangkhen 9 Internet Access</h1>
+        <h1>
+            <img src="/bcbk9-logo.svg" class="header-logo"></img>
+            BarCamp Bangkhen 9 Internet Access
+        </h1>
         <hr/>
         <div id="card-citizen" class="collapse show">
             <div class="row">
